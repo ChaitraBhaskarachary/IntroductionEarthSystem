@@ -1,0 +1,545 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{}
+    \pretitle{\vspace{\droptitle}}
+  \posttitle{}
+    \author{}
+    \preauthor{}\postauthor{}
+    \date{}
+    \predate{}\postdate{}
+  
+
+\begin{document}
+
+\section{R script to convert netCDF Climate dataset to
+Quicklook}\label{r-script-to-convert-netcdf-climate-dataset-to-quicklook}
+
+\subsection{1. Reading a netCDF data set using the ncdf4
+package}\label{reading-a-netcdf-data-set-using-the-ncdf4-package}
+
+\paragraph{\texorpdfstring{The \texttt{ndcf4} package is used to read,
+write and analyze netCDF files.The \texttt{netCDF} package is available
+in both windows and MAC OS X and Linux and supports both older NetCDF3
+format as well as netCDF4. To begin, load the ncdf4
+package}{The ndcf4 package is used to read, write and analyze netCDF files.The netCDF package is available in both windows and MAC OS X and Linux and supports both older NetCDF3 format as well as netCDF4. To begin, load the ncdf4 package}}\label{the-ndcf4-package-is-used-to-read-write-and-analyze-netcdf-files.the-netcdf-package-is-available-in-both-windows-and-mac-os-x-and-linux-and-supports-both-older-netcdf3-format-as-well-as-netcdf4.-to-begin-load-the-ncdf4-package}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ncdf4)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'ncdf4' was built under R version 3.4.4
+\end{verbatim}
+
+\paragraph{\texorpdfstring{\texttt{fn} is the path where the file is
+located and cru10min30\_tmp.nc is the file
+name.}{fn is the path where the file is located and cru10min30\_tmp.nc is the file name.}}\label{fn-is-the-path-where-the-file-is-located-and-cru10min30_tmp.nc-is-the-file-name.}
+
+\paragraph{\texorpdfstring{\texttt{name} is the name of the variable
+that will be read
+in}{name is the name of the variable that will be read in}}\label{name-is-the-name-of-the-variable-that-will-be-read-in}
+
+\subsection{2. Open the netCDF file}\label{open-the-netcdf-file}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Set path and filename}
+\NormalTok{fn <-}\StringTok{ "F:}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{IntroductionEarthData}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{data_samples}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{netCDF}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{cru10min30_tmp.nc"}
+\NormalTok{name <-}\StringTok{ "tmp"}    \CommentTok{# tmp means temperature }
+\end{Highlighting}
+\end{Shaded}
+
+\paragraph{\texorpdfstring{Open the NetCDF dataset and print basic
+information. The \texttt{print()} function applied to \texttt{nc}object
+provides information about the
+dataset}{Open the NetCDF dataset and print basic information. The print() function applied to ncobject provides information about the dataset}}\label{open-the-netcdf-dataset-and-print-basic-information.-the-print-function-applied-to-ncobject-provides-information-about-the-dataset}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#open a netCDF file}
+\NormalTok{nc<-}\StringTok{ }\KeywordTok{nc_open}\NormalTok{(fn)}
+\KeywordTok{print}\NormalTok{(nc)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## File F:\IntroductionEarthData\data_samples\netCDF\cru10min30_tmp.nc (NC_FORMAT_CLASSIC):
+## 
+##      2 variables (excluding dimension variables):
+##         float time_bounds[nv,time]   
+##         float tmp[lon,lat,time]   
+##             long_name: air_temperature
+##             units: degC
+##             _FillValue: -99
+##             source: E:\Projects\cru\data\cru_cl_2.0\nc_files\cru10min_tmp.nc
+## 
+##      4 dimensions:
+##         lon  Size:720
+##             standard_name: longitude
+##             long_name: longitude
+##             units: degrees_east
+##             axis: X
+##         lat  Size:360
+##             standard_name: latitude
+##             long_name: latitude
+##             units: degrees_north
+##             axis: Y
+##         time  Size:12
+##             standard_name: time
+##             long_name: time
+##             units: days since 1900-01-01 00:00:00.0 -0:00
+##             axis: T
+##             calendar: standard
+##             climatology: climatology_bounds
+##         nv  Size:2
+## 
+##     7 global attributes:
+##         data: CRU CL 2.0 1961-1990 Monthly Averages
+##         title: CRU CL 2.0 -- 10min grid sampled every 0.5 degree
+##         institution: http://www.cru.uea.ac.uk/
+##         source: http://www.cru.uea.ac.uk/~markn/cru05/cru05_intro.html
+##         references: New et al. (2002) Climate Res 21:1-25
+##         history: Wed Oct 29 11:27:35 2014: ncrename -v climatology_bounds,time_bounds cru10min30_tmp.nc
+## P.J. Bartlein, 19 Jun 2005
+##         Conventions: CF-1.0
+\end{verbatim}
+
+\subsection{2.1. Get Coordinate including time
+variables}\label{get-coordinate-including-time-variables}
+
+\paragraph{\texorpdfstring{\texttt{ncvr\_get()} function is used to read
+the coordinate variables \texttt{longitude} and \texttt{latitude}.
+\texttt{head()} and \texttt{tail()} functions are used to list first few
+values and the number of variables can be verified using \texttt{dim()}
+function:}{ncvr\_get() function is used to read the coordinate variables longitude and latitude. head() and tail() functions are used to list first few values and the number of variables can be verified using dim() function:}}\label{ncvr_get-function-is-used-to-read-the-coordinate-variables-longitude-and-latitude.-head-and-tail-functions-are-used-to-list-first-few-values-and-the-number-of-variables-can-be-verified-using-dim-function}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{##get longitude and latitude}
+\NormalTok{lon <-}\StringTok{ }\KeywordTok{ncvar_get}\NormalTok{(nc,}\StringTok{"lon"}\NormalTok{)}
+\NormalTok{nlon <-}\StringTok{ }\KeywordTok{dim}\NormalTok{(lon)}
+\KeywordTok{head}\NormalTok{(lon)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -179.75 -179.25 -178.75 -178.25 -177.75 -177.25
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lat <-}\StringTok{ }\KeywordTok{ncvar_get}\NormalTok{(nc,}\StringTok{"lat"}\NormalTok{)}
+\NormalTok{nlat <-}\StringTok{ }\KeywordTok{dim}\NormalTok{(lat)}
+\KeywordTok{head}\NormalTok{(lat)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -89.75 -89.25 -88.75 -88.25 -87.75 -87.25
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(}\KeywordTok{c}\NormalTok{(nlon,nlat))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 720 360
+\end{verbatim}
+
+\paragraph{\texorpdfstring{Time variable and its attributes are derived
+by \texttt{ncvar\_get()} and \texttt{ncatt\_get()} functions and the
+dimensions of the time is obtained using \texttt{dim()}
+function}{Time variable and its attributes are derived by ncvar\_get() and ncatt\_get() functions and the dimensions of the time is obtained using dim() function}}\label{time-variable-and-its-attributes-are-derived-by-ncvar_get-and-ncatt_get-functions-and-the-dimensions-of-the-time-is-obtained-using-dim-function}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{##get time}
+\NormalTok{time <-}\StringTok{ }\KeywordTok{ncvar_get}\NormalTok{(nc,}\StringTok{"time"}\NormalTok{)}
+\NormalTok{time}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 27773.5 27803.5 27833.5 27864.0 27894.5 27925.0 27955.5 27986.5
+##  [9] 28017.0 28047.5 28078.0 28108.5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tunits <-}\StringTok{ }\KeywordTok{ncatt_get}\NormalTok{(nc,}\StringTok{"time"}\NormalTok{,}\StringTok{"units"}\NormalTok{)}
+\NormalTok{nt <-}\StringTok{ }\KeywordTok{dim}\NormalTok{(time)}
+\NormalTok{nt}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 12
+\end{verbatim}
+
+\paragraph{\texorpdfstring{Print the time units string. It can be
+noticed that the structure of the object tunits has two components
+hasatt (a logical variable), and tunits\$value, the actual ``time
+since''
+string.}{Print the time units string. It can be noticed that the structure of the object tunits has two components hasatt (a logical variable), and tunits\$value, the actual time since string.}}\label{print-the-time-units-string.-it-can-be-noticed-that-the-structure-of-the-object-tunits-has-two-components-hasatt-a-logical-variable-and-tunitsvalue-the-actual-time-since-string.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tunits}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $hasatt
+## [1] TRUE
+## 
+## $value
+## [1] "days since 1900-01-01 00:00:00.0 -0:00"
+\end{verbatim}
+
+\subsection{2.2. Get a variable}\label{get-a-variable}
+
+\paragraph{\texorpdfstring{Get a variable \texttt{tmp} and its attribute
+and verify the size of the
+array}{Get a variable tmp and its attribute and verify the size of the array}}\label{get-a-variable-tmp-and-its-attribute-and-verify-the-size-of-the-array}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#get temperature}
+
+\NormalTok{tmp_array <-}\StringTok{ }\KeywordTok{ncvar_get}\NormalTok{(nc,name)}
+\NormalTok{dlname <-}\StringTok{ }\KeywordTok{ncatt_get}\NormalTok{(nc,name,}\StringTok{"long_name"}\NormalTok{)}
+\NormalTok{dunits <-}\StringTok{ }\KeywordTok{ncatt_get}\NormalTok{(nc,name,}\StringTok{"units"}\NormalTok{)}
+\NormalTok{fillvalue <-}\StringTok{ }\KeywordTok{ncatt_get}\NormalTok{(nc,name,}\StringTok{"_FillValue"}\NormalTok{)}
+\KeywordTok{dim}\NormalTok{(tmp_array)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 720 360  12
+\end{verbatim}
+
+\paragraph{Get the global attributes}\label{get-the-global-attributes}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#get global attributes}
+\NormalTok{title <-}\StringTok{ }\KeywordTok{ncatt_get}\NormalTok{(nc,}\DecValTok{0}\NormalTok{,}\StringTok{"title"}\NormalTok{)}
+\NormalTok{institution <-}\StringTok{ }\KeywordTok{ncatt_get}\NormalTok{(nc,}\DecValTok{0}\NormalTok{,}\StringTok{"institution"}\NormalTok{)}
+\NormalTok{datasource <-}\StringTok{ }\KeywordTok{ncatt_get}\NormalTok{(nc,}\DecValTok{0}\NormalTok{,}\StringTok{"source"}\NormalTok{)}
+\NormalTok{references <-}\StringTok{ }\KeywordTok{ncatt_get}\NormalTok{(nc,}\DecValTok{0}\NormalTok{,}\StringTok{"references"}\NormalTok{)}
+\NormalTok{history <-}\StringTok{ }\KeywordTok{ncatt_get}\NormalTok{(nc,}\DecValTok{0}\NormalTok{,}\StringTok{"history"}\NormalTok{)}
+\NormalTok{Conventions <-}\StringTok{ }\KeywordTok{ncatt_get}\NormalTok{(nc,}\DecValTok{0}\NormalTok{,}\StringTok{"Conventions"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Close the netCDF file}\label{close-the-netcdf-file}
+
+\paragraph{Check the current
+workspace:}\label{check-the-current-workspace}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ls}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "Conventions" "datasource"  "dlname"      "dunits"      "fillvalue"  
+##  [6] "fn"          "history"     "institution" "lat"         "lon"        
+## [11] "name"        "nc"          "nlat"        "nlon"        "nt"         
+## [16] "references"  "time"        "title"       "tmp_array"   "tunits"
+\end{verbatim}
+
+\subsection{3. Reshaping from raster to
+rectangular}\label{reshaping-from-raster-to-rectangular}
+
+\paragraph{\texorpdfstring{NetCDF files or data sets are naturally
+raster slabs (e.g.~a longitude by latitude ``slice''), bricks(longitude
+by latitude by time), or 4-d arrays(longitude by latitude by height by
+time) while most data analysis routines in R expect 2-d
+variable-by-observation data frames. In addition, time is usually stored
+as the CF (Climate Forecast) ``time since'' format that is not usually
+human-readable.}{NetCDF files or data sets are naturally raster slabs (e.g.~a longitude by latitude slice), bricks(longitude by latitude by time), or 4-d arrays(longitude by latitude by height by time) while most data analysis routines in R expect 2-d variable-by-observation data frames. In addition, time is usually stored as the CF (Climate Forecast) time since format that is not usually human-readable.}}\label{netcdf-files-or-data-sets-are-naturally-raster-slabs-e.g.a-longitude-by-latitude-slice-brickslongitude-by-latitude-by-time-or-4-d-arrayslongitude-by-latitude-by-height-by-time-while-most-data-analysis-routines-in-r-expect-2-d-variable-by-observation-data-frames.-in-addition-time-is-usually-stored-as-the-cf-climate-forecast-time-since-format-that-is-not-usually-human-readable.}
+
+\paragraph{Install and Load the below
+packages}\label{install-and-load-the-below-packages}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#load some packages}
+\KeywordTok{library}\NormalTok{(chron)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'chron' was built under R version 3.4.4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(lattice)}
+\KeywordTok{library}\NormalTok{(RColorBrewer)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'RColorBrewer' was built under R version 3.4.4
+\end{verbatim}
+
+\subsection{3.1.Convert the time
+variable}\label{convert-the-time-variable}
+
+\paragraph{\texorpdfstring{The time variable in ``time-since'' units is
+converted into readable form. \texttt{Chron()} function is used to
+determine the absolute value of each time value from time
+origin.}{The time variable in time-since units is converted into readable form. Chron() function is used to determine the absolute value of each time value from time origin.}}\label{the-time-variable-in-time-since-units-is-converted-into-readable-form.-chron-function-is-used-to-determine-the-absolute-value-of-each-time-value-from-time-origin.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# convert time -- split the time units string into fields}
+\NormalTok{tustr <-}\StringTok{ }\KeywordTok{strsplit}\NormalTok{(tunits}\OperatorTok{$}\NormalTok{value, }\StringTok{" "}\NormalTok{)}
+\NormalTok{tdstr <-}\StringTok{ }\KeywordTok{strsplit}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(tustr)[}\DecValTok{3}\NormalTok{], }\StringTok{"-"}\NormalTok{)}
+\NormalTok{tmonth <-}\StringTok{ }\KeywordTok{as.integer}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(tdstr)[}\DecValTok{2}\NormalTok{])}
+\NormalTok{tday <-}\StringTok{ }\KeywordTok{as.integer}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(tdstr)[}\DecValTok{3}\NormalTok{])}
+\NormalTok{tyear <-}\StringTok{ }\KeywordTok{as.integer}\NormalTok{(}\KeywordTok{unlist}\NormalTok{(tdstr)[}\DecValTok{1}\NormalTok{])}
+\KeywordTok{chron}\NormalTok{(time,}\DataTypeTok{origin=}\KeywordTok{c}\NormalTok{(tmonth, tday, tyear))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] (01/16/76 12:00:00) (02/15/76 12:00:00) (03/16/76 12:00:00)
+##  [4] (04/16/76 00:00:00) (05/16/76 12:00:00) (06/16/76 00:00:00)
+##  [7] (07/16/76 12:00:00) (08/16/76 12:00:00) (09/16/76 00:00:00)
+## [10] (10/16/76 12:00:00) (11/16/76 00:00:00) (12/16/76 12:00:00)
+\end{verbatim}
+
+\subsection{3.2. Replace netCDF fillvalues with R
+NAs}\label{replace-netcdf-fillvalues-with-r-nas}
+
+\paragraph{\texorpdfstring{The missing values are flagged using specific
+\texttt{(\_FillValues)}or
+\texttt{(missing\_value)\ in\ netCDF\ files.\ The\ missing\ values\ are\ treated\ by\ replacing\ unavailable\ data\ using}NA`
+value.}{The missing values are flagged using specific (\_FillValues)or (missing\_value) in netCDF files. The missing values are treated by replacing unavailable data usingNA` value.}}\label{the-missing-values-are-flagged-using-specific-_fillvaluesor-missing_value-in-netcdf-files.-the-missing-values-are-treated-by-replacing-unavailable-data-usingna-value.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# replace netCDF fill values with NA's}
+\NormalTok{tmp_array[tmp_array}\OperatorTok{==}\NormalTok{fillvalue}\OperatorTok{$}\NormalTok{value] <-}\StringTok{ }\OtherTok{NA}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{length}\NormalTok{(}\KeywordTok{na.omit}\NormalTok{(}\KeywordTok{as.vector}\NormalTok{(tmp_array[,,}\DecValTok{1}\NormalTok{])))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 62961
+\end{verbatim}
+
+\subsection{3.3. Get a single time slice of
+data}\label{get-a-single-time-slice-of-data}
+
+\paragraph{\texorpdfstring{NetCDF variables are read and written as
+one-dimensional vectors (e.g.~longitudes), two-dimensional arrays or
+matrices (raster ``slices''), or multi-dimensional arrays (raster
+``bricks''). In such data structures, the coordinate values for each
+grid point are implicit, inferred from the marginal values of, for
+example, longitude, latitude and time. In contrast, in R, the principal
+data structure for a variable is the data frame. In the kinds of data
+sets usually stored as netCDF files, each row in the data frame will
+contain the data for an individual grid point, with each column
+representing a particular variable, including explicit values for
+longitude and latitude (and perhaps time). In the example CRU data set
+considered here, the variables would consist of longitude, latitude and
+12 columns of long-term means for each month, with the full data set
+thus consisting of 259200 rows (720 by 360) and 14
+columns.}{NetCDF variables are read and written as one-dimensional vectors (e.g.~longitudes), two-dimensional arrays or matrices (raster slices), or multi-dimensional arrays (raster bricks). In such data structures, the coordinate values for each grid point are implicit, inferred from the marginal values of, for example, longitude, latitude and time. In contrast, in R, the principal data structure for a variable is the data frame. In the kinds of data sets usually stored as netCDF files, each row in the data frame will contain the data for an individual grid point, with each column representing a particular variable, including explicit values for longitude and latitude (and perhaps time). In the example CRU data set considered here, the variables would consist of longitude, latitude and 12 columns of long-term means for each month, with the full data set thus consisting of 259200 rows (720 by 360) and 14 columns.}}\label{netcdf-variables-are-read-and-written-as-one-dimensional-vectors-e.g.longitudes-two-dimensional-arrays-or-matrices-raster-slices-or-multi-dimensional-arrays-raster-bricks.-in-such-data-structures-the-coordinate-values-for-each-grid-point-are-implicit-inferred-from-the-marginal-values-of-for-example-longitude-latitude-and-time.-in-contrast-in-r-the-principal-data-structure-for-a-variable-is-the-data-frame.-in-the-kinds-of-data-sets-usually-stored-as-netcdf-files-each-row-in-the-data-frame-will-contain-the-data-for-an-individual-grid-point-with-each-column-representing-a-particular-variable-including-explicit-values-for-longitude-and-latitude-and-perhaps-time.-in-the-example-cru-data-set-considered-here-the-variables-would-consist-of-longitude-latitude-and-12-columns-of-long-term-means-for-each-month-with-the-full-data-set-thus-consisting-of-259200-rows-720-by-360-and-14-columns.}
+
+\paragraph{\texorpdfstring{This particular structure of this data set
+can be illustrated by selecting a single slice from the temperature
+``brick'', turning it into a data frame with three variables and 720 by
+360
+rows,}{This particular structure of this data set can be illustrated by selecting a single slice from the temperature brick, turning it into a data frame with three variables and 720 by 360 rows,}}\label{this-particular-structure-of-this-data-set-can-be-illustrated-by-selecting-a-single-slice-from-the-temperature-brick-turning-it-into-a-data-frame-with-three-variables-and-720-by-360-rows}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# get a single slice or layer (January)}
+\NormalTok{m <-}\StringTok{ }\DecValTok{1}
+\NormalTok{tmp_slice <-}\StringTok{ }\NormalTok{tmp_array[,,m]}
+\end{Highlighting}
+\end{Shaded}
+
+\paragraph{\texorpdfstring{The dimensions of \texttt{tmp\_slice},
+e.g.~720, 360, can be verified using the \texttt{dim()}
+function.}{The dimensions of tmp\_slice, e.g.~720, 360, can be verified using the dim() function.}}\label{the-dimensions-of-tmp_slice-e.g.720-360-can-be-verified-using-the-dim-function.}
+
+\subsection{4. Visualization}\label{visualization}
+
+\paragraph{\texorpdfstring{A quick look (map) of the extracted slice of
+data can be obtained using the \texttt{image()} function.The
+\texttt{expand.grid()} function is used to create a set of 720 by 360
+pairs of latitude and longitude values (with latitudes varying most
+rapidly), one for each element in the \texttt{tmp\_slice} array.
+Specific values of the cutpoints of temperature categories are defined
+to cover the range of temperature
+values}{A quick look (map) of the extracted slice of data can be obtained using the image() function.The expand.grid() function is used to create a set of 720 by 360 pairs of latitude and longitude values (with latitudes varying most rapidly), one for each element in the tmp\_slice array. Specific values of the cutpoints of temperature categories are defined to cover the range of temperature values}}\label{a-quick-look-map-of-the-extracted-slice-of-data-can-be-obtained-using-the-image-function.the-expand.grid-function-is-used-to-create-a-set-of-720-by-360-pairs-of-latitude-and-longitude-values-with-latitudes-varying-most-rapidly-one-for-each-element-in-the-tmp_slice-array.-specific-values-of-the-cutpoints-of-temperature-categories-are-defined-to-cover-the-range-of-temperature-values}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# quick map}
+\NormalTok{grid <-}\StringTok{ }\KeywordTok{expand.grid}\NormalTok{(}\DataTypeTok{lon=}\NormalTok{lon, }\DataTypeTok{lat=}\NormalTok{lat)}
+\NormalTok{cutpts <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{50}\NormalTok{,}\OperatorTok{-}\DecValTok{40}\NormalTok{,}\OperatorTok{-}\DecValTok{30}\NormalTok{,}\OperatorTok{-}\DecValTok{20}\NormalTok{,}\OperatorTok{-}\DecValTok{10}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{20}\NormalTok{,}\DecValTok{30}\NormalTok{,}\DecValTok{40}\NormalTok{,}\DecValTok{50}\NormalTok{)}
+\KeywordTok{levelplot}\NormalTok{(tmp_slice }\OperatorTok{~}\StringTok{ }\NormalTok{lon }\OperatorTok{*}\StringTok{ }\NormalTok{lat, }\DataTypeTok{data=}\NormalTok{grid, }\DataTypeTok{at=}\NormalTok{cutpts, }\DataTypeTok{cuts=}\DecValTok{11}\NormalTok{, }\DataTypeTok{pretty=}\NormalTok{T, }
+\DataTypeTok{col.regions=}\NormalTok{(}\KeywordTok{rev}\NormalTok{(}\KeywordTok{brewer.pal}\NormalTok{(}\DecValTok{10}\NormalTok{,}\StringTok{"RdBu"}\NormalTok{))))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Intro_files/figure-latex/unnamed-chunk-18-1.pdf}
+
+\paragraph{\texorpdfstring{Quicklook of slice of data with different
+month, red color indicates the variation of increase in the temperature
+and Blue color indicates the winter period. Consider for example during
+the month \texttt{June} we can notice that most part of the world is
+experiencing an increase in the
+temperature}{Quicklook of slice of data with different month, red color indicates the variation of increase in the temperature and Blue color indicates the winter period. Consider for example during the month June we can notice that most part of the world is experiencing an increase in the temperature}}\label{quicklook-of-slice-of-data-with-different-month-red-color-indicates-the-variation-of-increase-in-the-temperature-and-blue-color-indicates-the-winter-period.-consider-for-example-during-the-month-june-we-can-notice-that-most-part-of-the-world-is-experiencing-an-increase-in-the-temperature}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# June Month}
+\NormalTok{m <-}\StringTok{ }\DecValTok{6}
+\NormalTok{tmp_slice <-}\StringTok{ }\NormalTok{tmp_array[,,m]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# quick map}
+\NormalTok{grid <-}\StringTok{ }\KeywordTok{expand.grid}\NormalTok{(}\DataTypeTok{lon=}\NormalTok{lon, }\DataTypeTok{lat=}\NormalTok{lat)}
+\NormalTok{cutpts <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{50}\NormalTok{,}\OperatorTok{-}\DecValTok{40}\NormalTok{,}\OperatorTok{-}\DecValTok{30}\NormalTok{,}\OperatorTok{-}\DecValTok{20}\NormalTok{,}\OperatorTok{-}\DecValTok{10}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{20}\NormalTok{,}\DecValTok{30}\NormalTok{,}\DecValTok{40}\NormalTok{,}\DecValTok{50}\NormalTok{)}
+\KeywordTok{levelplot}\NormalTok{(tmp_slice }\OperatorTok{~}\StringTok{ }\NormalTok{lon }\OperatorTok{*}\StringTok{ }\NormalTok{lat, }\DataTypeTok{data=}\NormalTok{grid, }\DataTypeTok{at=}\NormalTok{cutpts, }\DataTypeTok{cuts=}\DecValTok{11}\NormalTok{, }\DataTypeTok{pretty=}\NormalTok{T, }
+  \DataTypeTok{col.regions=}\NormalTok{(}\KeywordTok{rev}\NormalTok{(}\KeywordTok{brewer.pal}\NormalTok{(}\DecValTok{10}\NormalTok{,}\StringTok{"RdBu"}\NormalTok{))))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Intro_files/figure-latex/unnamed-chunk-20-1.pdf}
+
+
+\end{document}
